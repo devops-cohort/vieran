@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<h3><b>The teams your team wishes it could be, try to make it to the top!</b></h3>
+	<style>
+	teble, th, td {
+		border: 1px solid black;
+	}
+	th, td {
+		padding: 15px;
+	}
+	table tr:nth-child(even) {
+		  background-color: #eee;
+	}
+	table tr:nth-child(odd) {
+		 background-color: #fff;
+	}
+	table th {
+		  background-color: black;
+			    color: white;
+	}
+	</style>
+	<table style="width:100%">
+		<tr>
+			<th>Manager</th>
+			<th>Team</th>
+			<th>Total Points</th>
+		</tr>
+	{% for team in teams %}
+		<tr>
+			<td>{{ team.manager.username }}</td>
+			<td>{{ team.team_name }}</td>
+			<td>{{ team.points }}</td>
+		</tr>
+	{% endfor %}
+{% endblock body_content %}
