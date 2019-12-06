@@ -100,7 +100,7 @@ def account():
 
 @app.route('/deleteaccount', methods=['GET', 'POST'])
 @login_required
-def deleteaccount():
+def delete_account():
     user = current_user.id
     teams = Team.query(filter_by(user_id=user))
     for team in teams:
