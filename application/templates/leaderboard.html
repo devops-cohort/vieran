@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body_content %}
-	<h3><b>The best teams in the land!</b></h3>
+	<h3><b>The teams your team wishes it could be, try to make it to the top!</b></h3>
 	{% for team in teams %}
 		<div class="top teams">
 			<p>{{ teams.index(team)+1 }}) <i>Manager:</i> {{ team.manager.username }}	<i> Team:</i> {{ team.team_name }}	<i>Points:</i> {{ team.points }}</p>
