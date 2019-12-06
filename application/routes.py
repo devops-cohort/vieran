@@ -102,7 +102,7 @@ def account():
 @login_required
 def delete_account():
     user = current_user.id
-    teams = Team.query(filter_by(user_id=user))
+    teams = Team.query.filter_by(user_id=user)
     for team in teams:
         db.session.delete(team)
     account = current_user
