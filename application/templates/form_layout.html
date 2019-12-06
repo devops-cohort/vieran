@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<div class="form">
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+			<div class = "form-group">
+				{% for field in fields %}
+					{{ field.label }}
+					{% if field.errors %}
+						{{ field }}
+						<div class="error">
+							{% for error in field.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ field }}
+					{% endif %}
+					<br>
+				{% endfor %}
+			</div>
+			<div class="form-group">
+				{{ form.submit }}
+			</div>
+		</form>
+	</div>
+{% endblock body_content %}
