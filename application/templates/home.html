@@ -1,12 +1,11 @@
 {% extends "layout.html" %}
 {% block body_content %}
-	<p>Welcome to this web app!</p>
-	{% for post in posts %}
-		<div>
-			<h3>{{ post.title }}</h3>
-			<span>by <i>{{ post.author.first_name }} {{ post.author.last_name }}</span>
-			<span>on the <i>{{ post.date_posted }}</i></span>
-			<p> -- {{ post.content }}</p>
-		</div>
-	{% endfor %}
+	<p><b>Welcome to fantasy football!</b></p>
+	<div>
+		Create the best team you can
+		<br>
+		Get the most points
+		<br>
+		Try to reach the top of the leaderboard
+	</div>
 {% endblock body_content %}

@@ -1,11 +1,13 @@
 attrs==19.3.0
 bcrypt==3.1.7
 boto==2.44.0
+certifi==2019.11.28
 cffi==1.13.2
 chardet==2.3.0
 Click==7.0
 coverage==4.5.4
 crcmod==1.7
+cryptography==2.8
 enum34==1.1.6
 Flask==1.1.1
 Flask-Bcrypt==0.7.1
@@ -25,6 +27,7 @@ MarkupSafe==1.1.1
 more-itertools==8.0.0
 packaging==19.2
 pathlib2==2.3.5
+pkg-resources==0.0.0
 pluggy==0.13.1
 py==1.8.0
 pyasn1==0.1.9
