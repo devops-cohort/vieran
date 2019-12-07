@@ -107,27 +107,28 @@ def view_teams():
     teams = Team.query.filter_by(user_id=user)
     return render_template('view_teams.html', title='My Teams', teams=teams)
 
-@app.route('/transfers/<int:teamid>', methods=['GET','POST'])
-@login_required
-def transfers(teamid):
-    team = Team.query.filter_by(team_id=teamid).first()
-    form = TransferForm()
-    transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
-    if form.validate_on_submit:
-        team.team_name = form.team_name.data
-        team.goalkeeper = form.goalkeeper.data
-        team.defence = form.defence.data
-        team.midfield = form.midfield.data
-        team.attack = form.attack.data
-        db.session.commit()
-        return redirect(url_for('view_teams'))
-    elif request.method == 'GET':
-        form.team_name.data = team.team_name
-        form.goalkeeper.data = team.goalkeeper
-        form.defence.data = team.defence
-        form.midfield.data = team.midfield
-        form.attack.data = team.attack
-    return render_template('transfers.html', title='Transfer', form=form, team_id=teamid, fields=transfer_fields)
+'''Couldn't get transfers to work, it just removed all data from the team. Will try to fix'''
+##@app.route('/transfers/<int:teamid>', methods=['GET','POST'])
+##@login_required
+##def transfers(teamid):
+##    team = Team.query.filter_by(team_id=teamid).first()
+##    form = TransferForm()
+##    transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
+##    if form.validate_on_submit:
+##        team.team_name = form.team_name.data
+##        team.goalkeeper = form.goalkeeper.data
+##        team.defence = form.defence.data
+##        team.midfield = form.midfield.data
+##        team.attack = form.attack.data
+##        db.session.commit()
+##        return redirect(url_for('view_teams'))
+##    elif request.method == 'GET':
+##        form.team_name.data = team.team_name
+##        form.goalkeeper.data = team.goalkeeper
+##        form.defence.data = team.defence
+##        form.midfield.data = team.midfield
+##        form.attack.data = team.attack
+##    return render_template('transfers.html', title='Transfer', form=form, team_id=teamid, fields=transfer_fields)
 
 @app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
 @login_required
