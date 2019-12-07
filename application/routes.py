@@ -105,7 +105,7 @@ def view_teams():
     teams = Team.query.filter_by(user_id=user)
     return render_template('view_teams.html', title='My Teams', teams=teams)
 
-@app.route('/transfers/<int:team_id>', methods=['GET','POST'])
+@app.route('/transfers/<int:teamid>', methods=['GET','POST'])
 @login_required
 def transfers(teamid):
     form = TransferForm()
