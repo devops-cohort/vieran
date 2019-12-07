@@ -102,6 +102,7 @@ def account():
 @login_required
 def transfers():
     form = TransferForm()
+    transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
     team = Team.query.filter_by(team_id=team_id).first()
     if form.validate_on_submit:
         team.team_name = form.team_name.data
@@ -117,6 +118,7 @@ def transfers():
         form.defence.data = team.defence
         form.midfield.data = team.midfield
         form.attack.data = team.attack
+        return render_template('transfers.html', title='Transfer', form=form, fields=transfer_fields)
 
 @app.route('/deleteaccount', methods=['GET', 'POST'])
 @login_required
