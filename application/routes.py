@@ -110,8 +110,8 @@ def view_teams():
 @app.route('/transfers/<int:teamid>', methods=['GET','POST'])
 @login_required
 def transfers(teamid):
-    form = TransferForm()
     team = Team.query.filter_by(team_id=teamid).first()
+    form = TransferForm()
     transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
     if form.validate_on_submit:
         team.team_name = form.team_name.data
