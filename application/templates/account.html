@@ -1,1 +1,8 @@
 {% extends "form_layout.html" %}
+{% block bottom_content %}
+<br>
+<p><b>Warning! This will delete your account! Only do this if you are sure</b></p>
+<form action="{{ url_for('delete_account') }}">
+	<button type="submit">Delete account</button>
+</form>
+{% endblock bottom_content %}

@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import User, Player, Team
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateTeamForm  # Comment out createteamform when creating database
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, TransferForm, CreateTeamForm  # Comment out createteamform when creating database
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/home")
@@ -77,7 +77,7 @@ def create_team():
         )
         db.session.add(team)
         db.session.commit()
-        return redirect(url_for("home")) #change this to viewteam when done
+        return redirect(url_for("view_teams"))
     else:
         print(form.errors)
         return render_template("create_team.html", title="Create team", form=form, fields=createteam_fields)
@@ -86,14 +86,65 @@ def create_team():
 @login_required
 def account():
     form = UpdateAccountForm()
-    update_fields = [form.first_name, form.last_name, form.email]
+    update_fields = [form.first_name, form.last_name, form.email, form.username]
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
+        current_user.username = form.username.data
         db.session.commit()
     elif request.method == 'GET':
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+        form.username.data = current_user.username
     return render_template('account.html', title='Account', form=form, fields=update_fields)
+
+@app.route('/viewteams', methods=['GET', 'POST'])
+@login_required
+def view_teams():
+    user = current_user.id
+    teams = Team.query.filter_by(user_id=user)
+    return render_template('view_teams.html', title='My Teams', teams=teams)
+
+@app.route('/transfers/<int:teamid>', methods=['GET','POST'])
+@login_required
+def transfers(teamid):
+    form = TransferForm()
+    team = Team.query.filter_by(team_id=teamid).first()
+    transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
+    if form.validate_on_submit:
+        team.team_name = form.team_name.data
+        team.goalkeeper = form.goalkeeper.data
+        team.defence = form.defence.data
+        team.midfield = form.midfield.data
+        team.attack = form.attack.data
+        db.session.commit()
+        return redirect(url_for('view_teams'))
+    elif request.method == 'GET':
+        form.team_name.data = team.team_name
+        form.goalkeeper.data = team.goalkeeper
+        form.defence.data = team.defence
+        form.midfield.data = team.midfield
+        form.attack.data = team.attack
+    return render_template('transfers.html', title='Transfer', form=form, team_id=teamid, fields=transfer_fields)
+
+@app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
+@login_required
+def delete_team(team_id):
+    team = Team.query.filter_by(team_id=team_id).first()
+    db.session.delete(team)
+    db.session.commit()
+    return redirect(url_for('view_teams'))
+
+@app.route('/deleteaccount', methods=['GET', 'POST'])
+@login_required
+def delete_account():
+    user = current_user.id
+    teams = Team.query.filter_by(user_id=user)
+    for team in teams:
+        db.session.delete(team)
+    account = current_user
+    db.session.delete(account)
+    db.session.commit()
+    return redirect(url_for('home'))
