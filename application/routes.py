@@ -91,11 +91,13 @@ def account():
         current_user.email = form.email.data
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
+        current_user.username = form.username.data
         db.session.commit()
     elif request.method == 'GET':
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+        form.username.data = current_user.username
     return render_template('account.html', title='Account', form=form, fields=update_fields)
 
 @app.route('/viewteams', methods=['GET', 'POST'])
