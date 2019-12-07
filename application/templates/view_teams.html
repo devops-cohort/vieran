@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block body_content %}
+        <h3><b>Here are the teams you have created!!</b></h3>
+	<style>
+	table, th, td {
+		border: 1px solid black;
+		}
+	th, td {
+		padding: 15px;
+	}
+	table tr:nth-child(even) {
+		background-color: #eee;
+	}
+	table tr:nth-child(odd) {
+		background-color: #fff;
+	}
+	table th {
+		background-color: black;
+		color: white;
+	}
+	</style>
+	<table style="width:100%">
+		<tr>
+			<th>Team name</th>
+			<th>Goalkeeper</th>
+			<th>Defender</th>
+			<th>Midfielder</th>
+			<th>Striker</th>
+			<th>Make transfers</th>
+			<th>Delete team</th>
+		</tr>
+		{% for team in teams %}
+			<tr>
+				<td>{{ team.team_name }}</td>
+				<td>{{ team.goalkeeper }}</td>
+				<td>{{ team.defence }}</td>
+				<td>{{ team.midfield }}</td>
+				<td>{{ team.attack }}</td>
+				<td>
+				<form action="{{ url_for('transfers', team_id=team.team_id) }}">
+					<button type="submit">Transfers</button>
+				</form>
+				</td>
+				<td>
+				<form action="{{ url_for('delete_team', team_id=team.team_id) }}">
+					        <button type="submit">Delete team</button>
+				</form>
+				</td>
+			</tr>
+		{% endfor %}
+{% endblock body_content %}
