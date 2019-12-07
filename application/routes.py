@@ -125,7 +125,7 @@ def transfers(teamid):
         form.defence.data = team.defence
         form.midfield.data = team.midfield
         form.attack.data = team.attack
-        return render_template('transfers.html', title='Transfer', form=form, fields=transfer_fields)
+    return render_template('transfers.html', title='Transfer', form=form, fields=transfer_fields)
 
 @app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
 @login_required
