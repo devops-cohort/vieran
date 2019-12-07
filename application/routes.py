@@ -77,7 +77,7 @@ def create_team():
         )
         db.session.add(team)
         db.session.commit()
-        return redirect(url_for("home")) #change this to viewteam when done
+        return redirect(url_for("view_teams"))
     else:
         print(form.errors)
         return render_template("create_team.html", title="Create team", form=form, fields=createteam_fields)
@@ -118,7 +118,7 @@ def transfers(team_id):
         team.midfield = form.midfield.data
         team.attack = form.attack.data
         db.session.commit()
-        return redirect(url_for('leaderboard')) #change to view teams when done
+        return redirect(url_for('view_teams'))
     elif request.method == 'GET':
         form.team_name.data = team.team_name
         form.goalkeeper.data = team.goalkeeper
@@ -130,10 +130,10 @@ def transfers(team_id):
 @app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
 @login_required
 def delete_team(team_id):
-    team = Team.query.filter_by(team_id=teamid).first()
+    team = Team.query.filter_by(team_id=team_id).first()
     db.session.delete(team)
     db.session.commit()
-    return redirect(url_for('myteams'))
+    return redirect(url_for('view_teams'))
 
 @app.route('/deleteaccount', methods=['GET', 'POST'])
 @login_required
