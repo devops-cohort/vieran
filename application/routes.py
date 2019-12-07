@@ -100,7 +100,7 @@ def account():
 
 @app.route('/transfers/<int:team_id>', methods=['GET','POST'])
 @login_required
-def transfers():
+def transfers(team_id):
     form = TransferForm()
     transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
     team = Team.query.filter_by(team_id=team_id).first()
