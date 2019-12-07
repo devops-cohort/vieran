@@ -130,7 +130,7 @@ def transfers(team_id):
 @app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
 @login_required
 def delete_team(team_id):
-    team = Teams.query.filter_by(team_id=teamid).first()
+    team = Team.query.filter_by(team_id=teamid).first()
     db.session.delete(team)
     db.session.commit()
     return redirect(url_for('myteams'))
