@@ -100,7 +100,7 @@ def account():
 
 @app.route('/viewteams', methods=['GET', 'POST'])
 @login_required
-def view_teams:
+def view_teams():
     user = current_user.id
     teams = Team.query.filter_by(user_id=user)
     return render_template('view_teams.html', title='My Teams', teams=teams)
