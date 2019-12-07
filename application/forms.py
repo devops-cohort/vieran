@@ -139,6 +139,18 @@ for i in range(len(fwddata)):
 ## Comment out createteamform when creating databases
 class CreateTeamForm(FlaskForm):
 
+    for i in range(len(gkdata)):
+        gk_choices.append([gkdata[i].last_name, gkdata[i].last_name + ": " + gkdata[i].club])
+
+    for i in range(len(defdata)):
+        def_choices.append([defdata[i].last_name, defdata[i].last_name + ": " + defdata[i].club])
+
+    for i in range(len(middata)):
+        mid_choices.append([middata[i].last_name, middata[i].last_name + ": " + middata[i].club])
+
+    for i in range(len(fwddata)):
+        fwd_choices.append([fwddata[i].last_name, fwddata[i].last_name + ": " + fwddata[i].club])
+
     team_name = StringField('Team name',
         validators=[
             DataRequired(),
