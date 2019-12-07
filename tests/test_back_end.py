@@ -24,7 +24,7 @@ class TestBase(TestCase):
 
         #create test admin and normal user
         admin = User(email="admin@admin.com", first_name="admin", last_name="admin", password="admin")
-        user = User(email="tset@user.com", first_name="test", last_name="user", password="test")
+        user = User(email="test@user.com", first_name="test", last_name="user", password="test")
 
         #save users to database
         db.session.add(admin)
@@ -44,17 +44,17 @@ class UnitTest(TestBase):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
 
-    def test_posts(self):
+    def test_leaderboard(self):
         # Testmber of posts in posts table
 
-        # create test post
-        post = Posts(title="test", content="this is a test", user_id=2)
+        # create test team
+        team = Team(team_name="test", user_id=2, goalkeeper="test_gk", defence="test_def", midfield="test_mid", attack="test_fwd")
 
         # save post to database
-        db.session.add(post)
+        db.session.add(team)
         db.session.commit()
 
-        self.assertEqual(Posts.query.count(), 1)
+        self.assertEqual(Team.query.count(), 1)
 
     def test_login_view(self):
         # test login page is accessible without login
