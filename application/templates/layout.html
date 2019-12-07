@@ -11,8 +11,9 @@
 			{% if current_user.is_authenticated %}
 				<a href="{{ url_for("home") }}">Home</a>
 				<a href="{{ url_for("leaderboard") }}">Leaderboard</a>
-				<a href="{{ url_for("account") }}">Account</a>
 				<a href="{{ url_for("create_team") }}">Create Team</a>
+				<a href="{{ url_for("transfers") }}">Transfers</a>
+				<a href="{{ url_for("account") }}">Account</a>
 				<a href="{{ url_for("logout") }}">Logout</a>
 			{% else %}
 				<a href="{{ url_for("home") }}">Home</a>
