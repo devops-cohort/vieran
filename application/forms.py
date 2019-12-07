@@ -99,6 +99,12 @@ class UpdateAccountForm(FlaskForm):
         ]
     )
 
+    username = StringField('Username',
+        validators=[
+            DataRequired()
+        ]
+    )
+
     submit = SubmitField('Update')
 
     def validate_email(self, email):

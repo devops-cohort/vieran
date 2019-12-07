@@ -86,7 +86,7 @@ def create_team():
 @login_required
 def account():
     form = UpdateAccountForm()
-    update_fields = [form.first_name, form.last_name, form.email]
+    update_fields = [form.first_name, form.last_name, form.email, form.username]
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.first_name = form.first_name.data
