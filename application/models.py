@@ -39,14 +39,14 @@ class Player(db.Model):
 class Team(db.Model):
 
     team_id = db.Column(db.Integer, primary_key=True)
-    team_name = db.Column(db.String(25), nullable=False, unique=True)
+    team_name = db.Column(db.String(25))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     points = db.Column(db.Integer, nullable=False, default=0)
     remaining_transfers = db.Column(db.Integer, nullable=False, default=30)
-    goalkeeper = db.Column(db.String(25), nullable=False)
-    defence = db.Column(db.String(25), nullable=False)
-    midfield = db.Column(db.String(25), nullable=False)
-    attack = db.Column(db.String(25), nullable=False)
+    goalkeeper = db.Column(db.String(25))
+    defence = db.Column(db.String(25))
+    midfield = db.Column(db.String(25))
+    attack = db.Column(db.String(25))
 ## code for link table, may add later
 ##    player = db.relationship('Link', backref='team', lazy=true)
 
