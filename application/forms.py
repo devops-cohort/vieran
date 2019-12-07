@@ -58,7 +58,7 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user_name = User.query.filter_by(username=username.data).first()
         if user_name:
-            raise ValidationError("Unlucky mate, someone's already taken that username!")
+            raise ValidationError("Someone's already taken that username!")
 
 class LoginForm(FlaskForm):
     email = StringField('Email',
@@ -112,6 +112,12 @@ class UpdateAccountForm(FlaskForm):
             user = Users.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('This email is already in use - please choose another')
+
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = Users.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('This username is already in use - please choose another')
 
 gkdata = Player.query.filter_by(position="GK").all()
 defdata = Player.query.filter_by(position="DEF").all()
