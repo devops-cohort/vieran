@@ -120,6 +120,14 @@ def transfers(team_id):
         form.attack.data = team.attack
         return render_template('transfers.html', title='Transfer', form=form, fields=transfer_fields)
 
+@app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
+@login_required
+def delete_team(team_id):
+	team = Teams.query.filter_by(team_id=teamid).first()
+	db.session.delete(team)
+	db.session.commit()
+return redirect(url_for('myteams'))
+
 @app.route('/deleteaccount', methods=['GET', 'POST'])
 @login_required
 def delete_account():
