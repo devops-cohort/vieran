@@ -109,8 +109,8 @@ def view_teams():
 @login_required
 def transfers(teamid):
     form = TransferForm()
-    transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
     team = Team.query.filter_by(team_id=teamid).first()
+    transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
     if form.validate_on_submit:
         team.team_name = form.team_name.data
         team.goalkeeper = form.goalkeeper.data
