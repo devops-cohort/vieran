@@ -121,12 +121,12 @@ def transfers(teamid):
         team.attack = form.attack.data
         db.session.commit()
         return redirect(url_for('view_teams'))
-    #elif request.method == 'GET':
-    form.team_name.data = team.team_name
-    form.goalkeeper.data = team.goalkeeper
-    form.defence.data = team.defence
-    form.midfield.data = team.midfield
-    form.attack.data = team.attack
+    elif request.method == 'GET':
+        form.team_name.data = team.team_name
+        form.goalkeeper.data = team.goalkeeper
+        form.defence.data = team.defence
+        form.midfield.data = team.midfield
+        form.attack.data = team.attack
     return render_template('transfers.html', title='Transfer', form=form, team_id=teamid, fields=transfer_fields)
 
 @app.route("/deleteteam/<int:team_id>", methods=["GET", "POST"])
