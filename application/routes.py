@@ -98,6 +98,26 @@ def account():
         form.email.data = current_user.email
     return render_template('account.html', title='Account', form=form, fields=update_fields)
 
+@app.route('/transfers/<int:team_id>', methods=['GET','POST'])
+@login_required
+def transfers():
+    form = TransferForm()
+    team = Team.query.filter_by(team_id=team_id).first()
+    if form.validate_on_submit:
+        team.team_name = form.team_name.data
+        team.goalkeeper = form.goalkeeper.data
+        team.defence = form.defence.data
+        team.midfield = form.midfield.data
+        team.attack = form.attack.data
+        db.session.commit()
+        return redirect(url_for('leaderboard')) #change to view teams when done
+    elif request.method == 'GET':
+        form.team_name.data = team.team_name
+        form.goalkeeper.data = team.goalkeeper
+        form.defence.data = team.defence
+        form.midfield.data = team.midfield
+        form.attack.data = team.attack
+
 @app.route('/deleteaccount', methods=['GET', 'POST'])
 @login_required
 def delete_account():
