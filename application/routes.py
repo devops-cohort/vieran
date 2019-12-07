@@ -98,6 +98,13 @@ def account():
         form.email.data = current_user.email
     return render_template('account.html', title='Account', form=form, fields=update_fields)
 
+@app.route('/viewteams', methods=['GET', 'POST'])
+@login_required
+def view_teams:
+    user = current_user.id
+    teams = Team.query.filter_by(user_id=user)
+    return render_template('view_teams.html', title='My Teams', teams=teams)
+
 @app.route('/transfers/<int:team_id>', methods=['GET','POST'])
 @login_required
 def transfers(team_id):
