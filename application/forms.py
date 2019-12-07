@@ -113,10 +113,10 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('This email is already in use - please choose another')
 
-gkdata = Player.query.filter_by(position="GK").all()
-defdata = Player.query.filter_by(position="DEF").all()
-middata = Player.query.filter_by(position="MID").all()
-fwddata = Player.query.filter_by(position="FWD").all()
+##gkdata = Player.query.filter_by(position="GK").all()
+##defdata = Player.query.filter_by(position="DEF").all()
+##middata = Player.query.filter_by(position="MID").all()
+##fwddata = Player.query.filter_by(position="FWD").all()
 
 gk_choices=[]
 def_choices=[]
