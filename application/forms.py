@@ -113,31 +113,18 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('This email is already in use - please choose another')
 
-gkdata = Player.query.filter_by(position="GK").all()
-defdata = Player.query.filter_by(position="DEF").all()
-middata = Player.query.filter_by(position="MID").all()
-fwddata = Player.query.filter_by(position="FWD").all()
-
-gk_choices=[]
-def_choices=[]
-mid_choices=[]
-fwd_choices=[]
-
-for i in range(len(gkdata)):
-    gk_choices.append([gkdata[i].last_name, gkdata[i].last_name + ": " + gkdata[i].club])
-
-for i in range(len(defdata)):
-    def_choices.append([defdata[i].last_name, defdata[i].last_name + ": " + defdata[i].club])
-
-for i in range(len(middata)):
-    mid_choices.append([middata[i].last_name, middata[i].last_name + ": " + middata[i].club])
-
-for i in range(len(fwddata)):
-    fwd_choices.append([fwddata[i].last_name, fwddata[i].last_name + ": " + fwddata[i].club])
-
-
 ## Comment out createteamform when creating databases
 class CreateTeamForm(FlaskForm):
+
+    gkdata = Player.query.filter_by(position="GK").all()
+    defdata = Player.query.filter_by(position="DEF").all()
+    middata = Player.query.filter_by(position="MID").all()
+    fwddata = Player.query.filter_by(position="FWD").all()
+
+    gk_choices=[]
+    def_choices=[]
+    mid_choices=[]
+    fwd_choices=[]
 
     for i in range(len(gkdata)):
         gk_choices.append([gkdata[i].last_name, gkdata[i].last_name + ": " + gkdata[i].club])
@@ -211,6 +198,28 @@ class CreateTeamForm(FlaskForm):
 ##            raise ValidationError('You must select one striker!')
 
 class TransferForm(FlaskForm):
+
+    gkdata = Player.query.filter_by(position="GK").all()
+    defdata = Player.query.filter_by(position="DEF").all()
+    middata = Player.query.filter_by(position="MID").all()
+    fwddata = Player.query.filter_by(position="FWD").all()
+
+    gk_choices=[]
+    def_choices=[]
+    mid_choices=[]
+    fwd_choices=[]
+
+    for i in range(len(gkdata)):
+        gk_choices.append([gkdata[i].last_name, gkdata[i].last_name + ": " + gkdata[i].club])
+
+    for i in range(len(defdata)):
+        def_choices.append([defdata[i].last_name, defdata[i].last_name + ": " + defdata[i].club])
+
+    for i in range(len(middata)):
+        mid_choices.append([middata[i].last_name, middata[i].last_name + ": " + middata[i].club])
+
+    for i in range(len(fwddata)):
+        fwd_choices.append([fwddata[i].last_name, fwddata[i].last_name + ": " + fwddata[i].club])
 
     team_name = StringField('Team name',
         validators=[
