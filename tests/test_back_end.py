@@ -40,21 +40,33 @@ class TestBase(TestCase):
 class UnitTest(TestBase):
 
     def test_homepage_view(self):
-        # Test homepage is accesible while logged out
+        # Test homepage is accessible while logged out
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
 
-    def test_leaderboard(self):
-        # Testmber of posts in posts table
+    def test_create_team(self):
+        # Test number of teams in team table
 
         # create test team
         team = Team(team_name="test", user_id=2, goalkeeper="test_gk", defence="test_def", midfield="test_mid", attack="test_fwd")
 
-        # save post to database
+        # save team to database
         db.session.add(team)
         db.session.commit()
 
         self.assertEqual(Team.query.count(), 1)
+
+    def test_create_player(self):
+        # Test number of players in player table
+
+        # create test player
+        player = Player(last_name="kebe", first_name="jimmy", club="REA", position="mid")
+
+        # save player to database
+        db.session.add(player)
+        db.session.commit()
+
+        self.assertEqual(Player.query.count(), 1)
 
     def test_login_view(self):
         # test login page is accessible without login
