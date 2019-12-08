@@ -54,7 +54,7 @@ class UnitTest(TestBase):
         db.session.add(user2)
         db.session.commit()
 
-        self.assertEqual(User.query.count(), 1)
+        self.assertEqual(User.query.count(), 3)
 
     def test_create_team(self):
         # Test number of teams in team table
