@@ -44,6 +44,11 @@ class UnitTest(TestBase):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
 
+    def test_leaderboard_view(self):
+        # Test leaderboard is accessible while logged out
+        response = self.client.get(url_for('leaderboard'))
+        self.assertEqual(response.status_code, 200)
+
     def test_create_user(self):
         # Test number of users in user table
 
