@@ -109,3 +109,11 @@ class UnitTest(TestBase):
         # test register page is accessible without login
         response = self.client.get(url_for('register'))
         self.assertEqual(response.status_code, 200)
+
+    def test_create_team_view(self):
+        # test create team page is inaccessible without login
+        target_url = url_for('create_team')
+        redirect_url = url_for('login', next=target_url)
+        response = self.client.get(target_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, redirect_url)
