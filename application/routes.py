@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import User, Player, Team
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateTeamForm#, TransferForm  # Comment out createteamform when creating database
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm#, CreateTeamForm#, TransferForm  # Comment out createteamform when creating database
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/home")
