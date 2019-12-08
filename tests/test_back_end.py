@@ -44,6 +44,18 @@ class UnitTest(TestBase):
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
 
+    def test_create_user(self):
+        # Test number of users in user table
+
+        # create test user
+        user2 = User(email="user@mail.com", first_name="bob", last_name="loblaw", username="bobLoblaw", password="test")
+
+        # save team to database
+        db.session.add(user2)
+        db.session.commit()
+
+        self.assertEqual(User.query.count(), 1)
+
     def test_create_team(self):
         # Test number of teams in team table
 
