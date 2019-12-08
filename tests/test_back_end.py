@@ -23,13 +23,13 @@ class TestBase(TestCase):
         db.create_all()
 
         #create test admin and normal user
-##        admin = User(email="admin@admin.com", first_name="admin", last_name="admin", username="admin", password="admin")
-##        user = User(email="test@user.com", first_name="test", last_name="user", username="test", password="test")
+        admin = User(email="admin@admin.com", first_name="admin", last_name="admin", username="admin", password="admin")
+        user = User(email="test@user.com", first_name="test", last_name="user", username="test", password="test")
 
         #save users to database
-##        db.session.add(admin)
-##        db.session.add(user)
-##        db.session.commit()
+        db.session.add(admin)
+        db.session.add(user)
+        db.session.commit()
 
     def tearDown(self):
         # Annihilate tables after every test
