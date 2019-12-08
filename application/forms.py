@@ -118,7 +118,7 @@ class UpdateAccountForm(FlaskForm):
             user = Users.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError('This username is already in use - please choose another')
-'''
+
 gkdata = Player.query.filter_by(position="GK").all()
 defdata = Player.query.filter_by(position="DEF").all()
 middata = Player.query.filter_by(position="MID").all()
@@ -184,7 +184,7 @@ class CreateTeamForm(FlaskForm):
     def validate_team_name(self, team_name):
         team = Team.query.filter_by(team_name=team_name.data).first()
         if team:
-            raise ValidationError('Someone already has that team name, try a different one!')'''
+            raise ValidationError('Someone already has that team name, try a different one!')
 
 # This was needed for SelectMultipleForm, didn't use it but may change
 ##    def validate_gk(self, goalkeeper):
