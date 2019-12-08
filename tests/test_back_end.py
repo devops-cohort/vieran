@@ -20,6 +20,7 @@ class TestBase(TestCase):
 
         db.session.commit()
         db.drop_all()
+        db.session.commit()
         db.create_all()
 
         #create test admin and normal user
