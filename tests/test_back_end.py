@@ -104,3 +104,8 @@ class UnitTest(TestBase):
         redirect_url = url_for('login')
         response = self.client.get(target_url)
         self.assertRedirects(response, redirect_url)
+
+    def test_register_view(self):
+        # test register page is accessible without login
+        response = self.client.get(url_for('register'))
+        self.assertEqual(response.status_code, 200)
