@@ -118,7 +118,7 @@ class UpdateAccountForm(FlaskForm):
             user = Users.query.filter_by(username=username.data).first()
             if user:
                 raise ValidationError('This username is already in use - please choose another')
-
+'''
 gkdata = Player.query.filter_by(position="GK").all()
 defdata = Player.query.filter_by(position="DEF").all()
 middata = Player.query.filter_by(position="MID").all()
@@ -184,7 +184,7 @@ class CreateTeamForm(FlaskForm):
     def validate_team_name(self, team_name):
         team = Team.query.filter_by(team_name=team_name.data).first()
         if team:
-            raise ValidationError('Someone already has that team name, try a different one!')
+            raise ValidationError('Someone already has that team name, try a different one!')'''
 
 # This was needed for SelectMultipleForm, didn't use it but may change
 ##    def validate_gk(self, goalkeeper):
@@ -203,47 +203,49 @@ class CreateTeamForm(FlaskForm):
 ##        if (len(self.attack.data) != 1):
 ##            raise ValidationError('You must select one striker!')
 
-class TransferForm(FlaskForm):
 
-    team_name = StringField('Team name',
-        validators=[
-            DataRequired(),
-            Length(min=2, max=25)
-        ]
-    )
-    
-    goalkeeper = SelectField('Goalkeeper',
-        choices=gk_choices,
-        validators=[
-            DataRequired()
-        ]
-    )
-
-    defence = SelectField("Defender",
-        choices=def_choices,
-        validators=[
-            DataRequired()
-        ]
-    )
-
-    midfield = SelectField("Midfielder",
-        choices=mid_choices,
-        validators=[
-            DataRequired()
-        ]
-    )
-
-    attack = SelectField('Striker',
-        choices=fwd_choices,
-        validators=[
-            DataRequired()
-        ]
-    )
-
-    submit = SubmitField('Create team')
-
-    def validate_team_name(self, team_name):
-        if team_name.data != current_user.team_name:
-            user = Users.query.filter_by(team_name=team_name.data).first()
-            if user:
-                raise ValidationError('This team name is already in use - please choose another')
+# transfers page deleted all data in team, not sure why, removed for now
+##class TransferForm(FlaskForm):
+##
+##    team_name = StringField('Team name',
+##        validators=[
+##            DataRequired(),
+##            Length(min=2, max=25)
+##        ]
+##    )
+##    
+##    goalkeeper = SelectField('Goalkeeper',
+##        choices=gk_choices,
+##        validators=[
+##            DataRequired()
+##        ]
+##    )
+##
+##    defence = SelectField("Defender",
+##        choices=def_choices,
+##        validators=[
+##            DataRequired()
+##        ]
+##    )
+##
+##    midfield = SelectField("Midfielder",
+##        choices=mid_choices,
+##        validators=[
+##            DataRequired()
+##        ]
+##    )
+##
+##    attack = SelectField('Striker',
+##        choices=fwd_choices,
+##        validators=[
+##            DataRequired()
+##        ]
+##    )
+##
+##    submit = SubmitField('Create team')
+##
+##    def validate_team_name(self, team_name):
+##        if team_name.data != current_user.team_name:
+##            user = Users.query.filter_by(team_name=team_name.data).first()
+##            if user:
+##                raise ValidationError('This team name is already in use - please choose another')
