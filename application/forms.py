@@ -142,7 +142,7 @@ for i in range(len(fwddata)):
     fwd_choices.append([fwddata[i].last_name, fwddata[i].last_name + ": " + fwddata[i].club])
 
 ## Comment out createteamform when creating databases
-class CreateTeamForm(FlaskForm):
+'''class CreateTeamForm(FlaskForm):
 
     team_name = StringField('Team name',
         validators=[
@@ -184,7 +184,7 @@ class CreateTeamForm(FlaskForm):
     def validate_team_name(self, team_name):
         team = Team.query.filter_by(team_name=team_name.data).first()
         if team:
-            raise ValidationError('Someone already has that team name, try a different one!')
+            raise ValidationError('Someone already has that team name, try a different one!')'''
 
 # This was needed for SelectMultipleForm, didn't use it but may change
 ##    def validate_gk(self, goalkeeper):
