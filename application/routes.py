@@ -56,7 +56,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return redirect(url_for('create_team'))
+        return redirect(url_for('view_teams'))
     else:
         print(form.errors)
         return render_template("register.html", title = "Register", form=form, fields=register_fields)
