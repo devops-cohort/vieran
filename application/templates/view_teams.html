@@ -26,15 +26,17 @@
 			<th>Defender</th>
 			<th>Midfielder</th>
 			<th>Striker</th>
+			<th>Points</th>
 			<th>Delete team</th>
 		</tr>
 		{% for team in teams %}
 			<tr>
-				<td>{{ team.team_name }}</td>
+				<td><b>{{ team.team_name }}</b></td>
 				<td>{{ team.goalkeeper }}</td>
 				<td>{{ team.defence }}</td>
 				<td>{{ team.midfield }}</td>
 				<td>{{ team.attack }}</td>
+				<td>{{ team.points }}</td>
 				<td>
 				<form action="{{ url_for('delete_team', team_id=team.team_id) }}">
 					        <button type="submit">Delete team</button>
