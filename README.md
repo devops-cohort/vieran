@@ -20,6 +20,7 @@ A use case diagram was also made, to show the interactions between the user and 
 ![Use case diagram](https://github.com/devops-cohort/vieran/blob/test/Documentation/Use_case.png)
 
 Finally, a risk assessment was undertaken, to analyse any potential problems which would be faced in creating, deploying, and maintaining the application, and minimising these risks:
+
 | Risk      | Impact         | Likelihood  | Mitigation measure |
 | :-------------: |:-------------:| :-----:|:------: |
 | Losing code     | Medium | Medium | Regular uploads to GitHub |
