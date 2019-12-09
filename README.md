@@ -5,4 +5,4 @@ The aim of this project was to create an application with full CRUD functionalit
 To satisfy this brief, I designed a fantasy football application, in which users could create and edit and account, create teams, view their teams, and delete teams or delete their account
 ## Planning
 To plan this project, I used a Trello board to design the functionality that the app would provide:
-!(https://github.com/devops-cohort/vieran/blob/test/Documentation/Trello_board.png)
+![Trello board](https://github.com/devops-cohort/vieran/blob/test/Documentation/Trello_board.png)
