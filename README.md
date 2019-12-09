@@ -16,6 +16,7 @@ An Entity Relationship Diagram was made to describe the tables, and their relati
 ![ERD](https://github.com/devops-cohort/vieran/blob/test/Documentation/ERD.png)
 
 A use case diagram was also made, to show the interactions between the user and the database for all of the functionality of the application:
+
 ![Use case diagram](https://github.com/devops-cohort/vieran/blob/test/Documentation/Use_case.png)
 
 Finally, a risk assessment was undertaken, to analyse any potential problems which would be faced in creating, deploying, and maintaining the application, and minimising these risks:
