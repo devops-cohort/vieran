@@ -39,9 +39,7 @@
 				<td>{{ team.attack }}</td>
 				<td>{{ team.points }}</td>
 				<td>
-                                <form action="{{ url_for('transfers', teamid=team.team_id) }}">
-					<button type="submit">Transfers</button>
-                                </form>
+				<a href="{{ url_for('transfers', teamid=team.team_id) }}">Transfers</a>
                                 </td>
 				<td>
 				<form action="{{ url_for('delete_team', team_id=team.team_id) }}">
