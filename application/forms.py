@@ -58,7 +58,7 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user_name = User.query.filter_by(username=username.data).first()
         if user_name:
-            raise ValidationError("Unlucky mate, someone's already taken that username!")
+            raise ValidationError("Someone's already taken that username!")
 
 class LoginForm(FlaskForm):
     email = StringField('Email',
@@ -113,6 +113,12 @@ class UpdateAccountForm(FlaskForm):
             if user:
                 raise ValidationError('This email is already in use - please choose another')
 
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('This username is already in use - please choose another')
+
 gkdata = Player.query.filter_by(position="GK").all()
 defdata = Player.query.filter_by(position="DEF").all()
 middata = Player.query.filter_by(position="MID").all()
@@ -135,31 +141,8 @@ for i in range(len(middata)):
 for i in range(len(fwddata)):
     fwd_choices.append([fwddata[i].last_name, fwddata[i].last_name + ": " + fwddata[i].club])
 
-
 ## Comment out createteamform when creating databases
 class CreateTeamForm(FlaskForm):
-
-##    gkdata = Player.query.filter_by(position="GK").all()
-##    defdata = Player.query.filter_by(position="DEF").all()
-##    middata = Player.query.filter_by(position="MID").all()
-##    fwddata = Player.query.filter_by(position="FWD").all()
-##
-##    gk_choices=[]
-##    def_choices=[]
-##    mid_choices=[]
-##    fwd_choices=[]
-##
-##    for i in range(len(gkdata)):
-##        gk_choices.append([gkdata[i].last_name, gkdata[i].last_name + ": " + gkdata[i].club])
-##
-##    for i in range(len(defdata)):
-##        def_choices.append([defdata[i].last_name, defdata[i].last_name + ": " + defdata[i].club])
-##
-##    for i in range(len(middata)):
-##        mid_choices.append([middata[i].last_name, middata[i].last_name + ": " + middata[i].club])
-##
-##    for i in range(len(fwddata)):
-##        fwd_choices.append([fwddata[i].last_name, fwddata[i].last_name + ": " + fwddata[i].club])
 
     team_name = StringField('Team name',
         validators=[
@@ -220,6 +203,8 @@ class CreateTeamForm(FlaskForm):
 ##        if (len(self.attack.data) != 1):
 ##            raise ValidationError('You must select one striker!')
 
+
+# transfers page deleted all data in team, not sure why, removed for now
 class TransferForm(FlaskForm):
 
     team_name = StringField('Team name',

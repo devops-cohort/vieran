@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
 from application.models import User, Player, Team
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, TransferForm, CreateTeamForm  # Comment out createteamform when creating database
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateTeamForm, TransferForm  # Comment out createteamform when creating database
 from flask_login import login_user, current_user, logout_user, login_required
 
 @app.route("/home")
@@ -107,11 +107,12 @@ def view_teams():
     teams = Team.query.filter_by(user_id=user)
     return render_template('view_teams.html', title='My Teams', teams=teams)
 
+'''Couldn't get transfers to work, it just removed all data from the team. Will try to fix'''
 @app.route('/transfers/<int:teamid>', methods=['GET','POST'])
 @login_required
 def transfers(teamid):
-    form = TransferForm()
     team = Team.query.filter_by(team_id=teamid).first()
+    form = TransferForm()
     transfer_fields = [form.team_name, form.goalkeeper, form.defence, form.midfield, form.attack]
     if form.validate_on_submit:
         team.team_name = form.team_name.data

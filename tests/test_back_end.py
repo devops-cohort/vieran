@@ -12,7 +12,7 @@ class TestBase(TestCase):
         #pass in test configurations
         config_name = "testing"
         app.config.update(
-                SQLALCHEMY_DATABASE_URI='mysql+pymysql://'+str(getenv('FLASK_USER'))+':'+str(getenv('FLASK_PASSWORD'))+'@'+str(getenv('FLASK_HOST'))+'/'+str(getenv('FLASK_DB_TEST')))
+                SQLALCHEMY_DATABASE_URI='mysql+pymysql://'+getenv('FF_USER')+':'+getenv('FF_PASSWORD')+'@'+getenv('FF_HOST')+'/'+getenv('FF_DB_TEST'))
         return app
 
     def setUp(self):
@@ -23,8 +23,8 @@ class TestBase(TestCase):
         db.create_all()
 
         #create test admin and normal user
-        admin = User(email="admin@admin.com", first_name="admin", last_name="admin", password="admin")
-        user = User(email="tset@user.com", first_name="test", last_name="user", password="test")
+        admin = User(email="admin@admin.com", first_name="admin", last_name="admin", username="admin", password="admin")
+        user = User(email="test@user.com", first_name="test", last_name="user", username="test", password="test")
 
         #save users to database
         db.session.add(admin)
@@ -40,21 +40,50 @@ class TestBase(TestCase):
 class UnitTest(TestBase):
 
     def test_homepage_view(self):
-        # Test homepage is accesible while logged out
+        # Test homepage is accessible while logged out
         response = self.client.get(url_for('home'))
         self.assertEqual(response.status_code, 200)
 
-    def test_posts(self):
-        # Testmber of posts in posts table
+    def test_leaderboard_view(self):
+        # Test leaderboard is accessible while logged out
+        response = self.client.get(url_for('leaderboard'))
+        self.assertEqual(response.status_code, 200)
 
-        # create test post
-        post = Posts(title="test", content="this is a test", user_id=2)
+    def test_create_user(self):
+        # Test number of users in user table
 
-        # save post to database
-        db.session.add(post)
+        # create test user
+        user2 = User(email="user@mail.com", first_name="bob", last_name="loblaw", username="bobLoblaw", password="test")
+
+        # save team to database
+        db.session.add(user2)
         db.session.commit()
 
-        self.assertEqual(Posts.query.count(), 1)
+        self.assertEqual(User.query.count(), 3)
+
+    def test_create_team(self):
+        # Test number of teams in team table
+
+        # create test team
+        team = Team(team_name="test", user_id=2, goalkeeper="test_gk", defence="test_def", midfield="test_mid", attack="test_fwd")
+
+        # save team to database
+        db.session.add(team)
+        db.session.commit()
+
+        self.assertEqual(Team.query.count(), 1)
+
+    def test_create_player(self):
+        # Test number of players in player table
+
+        # create test player
+        player = Player(last_name="kebe", first_name="jimmy", club="REA", position="mid")
+
+        # save player to database
+        db.session.add(player)
+        db.session.commit()
+
+        self.assertEqual(Player.query.count(), 1)
 
     def test_login_view(self):
         # test login page is accessible without login
@@ -64,6 +93,34 @@ class UnitTest(TestBase):
     def test_user_view(self):
         # test user page is inaccessible without login
         target_url = url_for('account')
+        redirect_url = url_for('login', next=target_url)
+        response = self.client.get(target_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, redirect_url)
+
+    def test_logout(self):
+        # test logout page leads to login
+        target_url = url_for('logout')
+        redirect_url = url_for('login')
+        response = self.client.get(target_url)
+        self.assertRedirects(response, redirect_url)
+
+    def test_register_view(self):
+        # test register page is accessible without login
+        response = self.client.get(url_for('register'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_team_view(self):
+        # test create team page is inaccessible without login
+        target_url = url_for('create_team')
+        redirect_url = url_for('login', next=target_url)
+        response = self.client.get(target_url)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, redirect_url)
+
+    def test_view_teams_view(self):
+        # test create team page is inaccessible without login
+        target_url = url_for('view_teams')
         redirect_url = url_for('login', next=target_url)
         response = self.client.get(target_url)
         self.assertEqual(response.status_code, 302)
